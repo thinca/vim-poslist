@@ -43,7 +43,7 @@ augroup poslist
 augroup END
 
 if !exists('g:poslist_history')
-  let g:poslist_history = 50
+    let g:poslist_history = 50
 endif
 
 let s:save_pos = [ getpos('.') ]
@@ -64,21 +64,16 @@ function! s:save_current_pos()
         let s:current_pos_number = 0
     endif
 endfunction
-function! s:move_to_prev_pos()
-    if s:current_pos_number+1 < len(s:save_pos)
-        let s:current_pos_number += 1
-        call setpos('.', s:save_pos[s:current_pos_number])
-    endif
-endfunction
-function! s:move_to_next_pos()
-    if s:current_pos_number > 0
-        let s:current_pos_number -= 1
+function! s:move_pos(c)
+    let newpos = s:current_pos_number + a:c
+    if 0 <= newpos && newpos < len(s:save_pos)
+        let s:current_pos_number = newpos
         call setpos('.', s:save_pos[s:current_pos_number])
     endif
 endfunction
 
-noremap <silent> <Plug>(poslist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
-noremap <silent> <Plug>(poslist_next) :<C-u>call <SID>move_to_next_pos()<CR>
+noremap <silent> <Plug>(poslist_prev) :<C-u>call <SID>move_pos(v:count1)<CR>
+noremap <silent> <Plug>(poslist_next) :<C-u>call <SID>move_pos(-v:count1)<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
