@@ -60,7 +60,7 @@ function! s:save_current_pos()
         call insert(s:save_pos, l:pos)
         if len(s:save_pos) > g:poslist_history
             " Delete old pos.
-            let s:save_pos = s:save_pos[:g:poslist_history - 1]
+            unlet s:save_pos[g:poslist_history :]
         endif
         let s:current_pos_number = 0
     endif
