@@ -1,0 +1,31 @@
+augroup MyAutoCmd
+    autocmd CursorMoved * call s:save_current_pos()
+augroup END
+
+let s:save_pos = [ getpos('.') ]
+let s:current_pos_number = 0
+function! s:save_current_pos()
+    let l:pos = getpos('.')
+    if l:pos != s:save_pos[s:current_pos_number]
+        call insert(s:save_pos, l:pos)
+        if len(s:save_pos) > 50
+            " Delete old pos.
+            let s:save_pos = s:save_pos[:49]
+        endif
+        let s:current_pos_number = 0
+    endif
+endfunction
+function! s:move_to_prev_pos()
+    if s:current_pos_number+1 < len(s:save_pos)
+        let s:current_pos_number += 1
+        call setpos('.', s:save_pos[s:current_pos_number])
+    endif
+endfunction
+function! s:move_to_next_pos()
+    if s:current_pos_number > 0
+        let s:current_pos_number -= 1
+        call setpos('.', s:save_pos[s:current_pos_number])
+    endif
+endfunction
+noremap <silent> <C-k> :<C-u>call <SID>move_to_prev_pos()<CR>
+noremap <silent> <C-j> :<C-u>call <SID>move_to_next_pos()<CR>
