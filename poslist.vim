@@ -1,5 +1,5 @@
 "=============================================================================
-" FILE: getposlist.vim
+" FILE: poslist.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
 " Last Modified: 18 Dec 2009
 " Usage: Just source this file.
@@ -30,14 +30,14 @@
 " }}}
 "=============================================================================
 
-if exists('g:loaded_getposlist')
+if exists('g:loaded_poslist')
     finish
 endif
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup getposlist
+augroup poslist
     autocmd!
     autocmd CursorMoved * call s:save_current_pos()
 augroup END
@@ -74,12 +74,12 @@ function! s:move_to_next_pos()
     endif
 endfunction
 
-noremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
-noremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
+noremap <silent> <Plug>(poslist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
+noremap <silent> <Plug>(poslist_next) :<C-u>call <SID>move_to_next_pos()<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-let g:loaded_getposlist = 1
+let g:loaded_poslist = 1
 
 " vim: foldmethod=marker
