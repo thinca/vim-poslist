@@ -66,7 +66,12 @@ function! s:save_current_pos()
 endfunction
 function! s:move_pos(c)
     let newpos = s:current_pos_number + a:c
-    if 0 <= newpos && newpos < len(s:save_pos)
+    if newpos < 0
+        let newpos = 0
+    elseif len(s:save_pos) <= newpos
+        let newpos = len(s:save_pos) - 1
+    endif
+    if s:current_pos_number != newpos
         let s:current_pos_number = newpos
         call setpos('.', s:save_pos[s:current_pos_number])
     endif
