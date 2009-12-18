@@ -47,6 +47,12 @@ let s:current_pos_number = 0
 function! s:save_current_pos()
     let l:pos = getpos('.')
     if l:pos != s:save_pos[s:current_pos_number]
+        " Browser like history.
+        if 0 < s:current_pos_number
+          unlet s:save_pos[: s:current_pos_number - 1]
+          let s:current_pos_number = 0
+        endif
+
         call insert(s:save_pos, l:pos)
         if len(s:save_pos) > 50
             " Delete old pos.
