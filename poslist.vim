@@ -53,8 +53,8 @@ function! s:save_current_pos()
     if l:pos != s:save_pos[s:current_pos_number]
         " Browser like history.
         if 0 < s:current_pos_number
-          unlet s:save_pos[: s:current_pos_number - 1]
-          let s:current_pos_number = 0
+            unlet s:save_pos[: s:current_pos_number - 1]
+            let s:current_pos_number = 0
         endif
 
         call insert(s:save_pos, l:pos)
