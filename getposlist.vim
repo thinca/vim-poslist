@@ -74,10 +74,8 @@ function! s:move_to_next_pos()
     endif
 endfunction
 
-nnoremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
-xnoremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
-nnoremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
-xnoremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
+noremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
+noremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
