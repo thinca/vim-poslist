@@ -30,7 +30,15 @@
 " }}}
 "=============================================================================
 
+if exists('g:loaded_getposlist')
+    finish
+endif
+
+let s:save_cpo = &cpo
+set cpo&vim
+
 augroup getposlist
+    autocmd!
     autocmd CursorMoved * call s:save_current_pos()
 augroup END
 
@@ -64,3 +72,10 @@ nnoremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
 xnoremap <silent> <Plug>(getposlist_prev) :<C-u>call <SID>move_to_prev_pos()<CR>
 nnoremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
 xnoremap <silent> <Plug>(getposlist_next) :<C-u>call <SID>move_to_next_pos()<CR>
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
+let g:loaded_getposlist = 1
+
+" vim: foldmethod=marker
