@@ -42,6 +42,10 @@ augroup poslist
     autocmd CursorMoved * call s:save_current_pos()
 augroup END
 
+if !exists('g:poslist_history')
+  let g:poslist_history = 50
+endif
+
 let s:save_pos = [ getpos('.') ]
 let s:current_pos_number = 0
 function! s:save_current_pos()
@@ -54,9 +58,9 @@ function! s:save_current_pos()
         endif
 
         call insert(s:save_pos, l:pos)
-        if len(s:save_pos) > 50
+        if len(s:save_pos) > g:poslist_history
             " Delete old pos.
-            let s:save_pos = s:save_pos[:49]
+            let s:save_pos = s:save_pos[:g:poslist_history - 1]
         endif
         let s:current_pos_number = 0
     endif
