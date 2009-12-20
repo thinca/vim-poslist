@@ -1,6 +1,7 @@
 "=============================================================================
 " FILE: poslist.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
+" MODIFIED BY: thinca <thinca@gmail.com>
 " Last Modified: 18 Dec 2009
 " Usage: Just source this file.
 " License: MIT license  {{{
