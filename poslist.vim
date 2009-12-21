@@ -2,7 +2,7 @@
 " FILE: poslist.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
 " MODIFIED BY: thinca <thinca@gmail.com>
-" Last Modified: 18 Dec 2009
+" Last Modified: 21 Dec 2009
 " Usage: Just source this file.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
@@ -47,34 +47,42 @@ if !exists('g:poslist_history')
     let g:poslist_history = 50
 endif
 
-let s:save_pos = [ getpos('.') ]
-let s:current_pos_number = 0
-function! s:save_current_pos()
-    let l:pos = getpos('.')
-    if l:pos != s:save_pos[s:current_pos_number]
-        " Browser like history.
-        if 0 < s:current_pos_number
-            unlet s:save_pos[: s:current_pos_number - 1]
-        endif
-
-        call insert(s:save_pos, l:pos)
-        if len(s:save_pos) > g:poslist_history
-            " Delete old pos.
-            unlet s:save_pos[g:poslist_history :]
-        endif
-        let s:current_pos_number = 0
+function! s:init()
+    if !exists('w:poslist')
+        let w:poslist = [ getpos('.') ]
+        let w:poslist_pos = 0
     endif
 endfunction
+
+function! s:save_current_pos()
+    call s:init()
+    let l:pos = getpos('.')
+    if l:pos != w:poslist[w:poslist_pos]
+        " Browser like history.
+        if 0 < w:poslist_pos
+            unlet w:poslist[: w:poslist_pos - 1]
+        endif
+
+        call insert(w:poslist, l:pos)
+        if len(w:poslist) > g:poslist_history
+            " Delete old pos.
+            unlet w:poslist[g:poslist_history :]
+        endif
+        let w:poslist_pos = 0
+    endif
+endfunction
+
 function! s:move_pos(c)
-    let newpos = s:current_pos_number + a:c
+    call s:init()
+    let newpos = w:poslist_pos + a:c
     if newpos < 0
         let newpos = 0
-    elseif len(s:save_pos) <= newpos
-        let newpos = len(s:save_pos) - 1
+    elseif len(w:poslist) <= newpos
+        let newpos = len(w:poslist) - 1
     endif
-    if s:current_pos_number != newpos
-        let s:current_pos_number = newpos
-        call setpos('.', s:save_pos[s:current_pos_number])
+    if w:poslist_pos != newpos
+        let w:poslist_pos = newpos
+        call setpos('.', w:poslist[w:poslist_pos])
     endif
 endfunction
 
