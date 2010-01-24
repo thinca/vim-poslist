@@ -2,7 +2,7 @@
 " FILE: poslist.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
 " MODIFIED BY: thinca <thinca@gmail.com>
-" Last Modified: 21 Dec 2009
+" Last Modified: 23 Jan 2010
 " Usage: Just source this file.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
@@ -32,66 +32,97 @@
 "=============================================================================
 
 if exists('g:loaded_poslist')
-    finish
+  finish
 endif
+let g:loaded_poslist = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-augroup poslist
-    autocmd!
-    autocmd CursorMoved * call s:save_current_pos()
+augroup plugin-poslist
+  autocmd!
+  autocmd WinEnter,CursorMoved * call s:save_current_pos()
 augroup END
 
-if !exists('g:poslist_history')
-    let g:poslist_history = 50
+if !exists('g:poslist_histsize')
+  let g:poslist_histsize = 50
 endif
 
-function! s:init()
-    if !exists('w:poslist')
-        let w:poslist = [ getpos('.') ]
-        let w:poslist_pos = 0
-    endif
-endfunction
-
 function! s:save_current_pos()
-    call s:init()
-    let l:pos = getpos('.')
-    if l:pos != w:poslist[w:poslist_pos]
-        " Browser like history.
-        if 0 < w:poslist_pos
-            unlet w:poslist[: w:poslist_pos - 1]
-        endif
+  if !exists('w:poslist')
+    let w:poslist = []
+    let w:poslist_pos = 0
+  endif
 
-        call insert(w:poslist, l:pos)
-        if len(w:poslist) > g:poslist_history
-            " Delete old pos.
-            unlet w:poslist[g:poslist_history :]
-        endif
-        let w:poslist_pos = 0
+  let pos = getpos('.')
+  let pos[0] = bufnr('%')
+  if empty(w:poslist) || pos != w:poslist[w:poslist_pos]
+    " Browser like history.
+    if 0 < w:poslist_pos
+      unlet w:poslist[: w:poslist_pos - 1]
     endif
+
+    call insert(w:poslist, pos)
+    if g:poslist_histsize < len(w:poslist)
+      " Delete old pos.
+      unlet w:poslist[g:poslist_histsize :]
+    endif
+    let w:poslist_pos = 0
+  endif
 endfunction
 
 function! s:move_pos(c)
-    call s:init()
-    let newpos = w:poslist_pos + a:c
-    if newpos < 0
-        let newpos = 0
-    elseif len(w:poslist) <= newpos
-        let newpos = len(w:poslist) - 1
-    endif
-    if w:poslist_pos != newpos
-        let w:poslist_pos = newpos
-        call setpos('.', w:poslist[w:poslist_pos])
-    endif
+  call s:goto_pos(w:poslist_pos + a:c)
 endfunction
 
-noremap <silent> <Plug>(poslist_prev) :<C-u>call <SID>move_pos(v:count1)<CR>
-noremap <silent> <Plug>(poslist_next) :<C-u>call <SID>move_pos(-v:count1)<CR>
+function! s:move_buf(c)
+  let c = abs(a:c)
+  let sign = a:c < 0 ? -1 : 1
+  let posn = w:poslist_pos
+  let buf = w:poslist[posn][0]
+  let len = len(w:poslist)
+  while c && 0 <= posn && posn < len
+    if w:poslist[posn][0] != buf
+      let buf = w:poslist[posn][0]
+      let c -= 1
+    endif
+    let posn += sign
+  endwhile
+  if bufnr('%') != buf
+    call s:goto_pos(posn)
+  endif
+endfunction
+
+function! s:goto_pos(posn)
+  let posn = max([0, min([len(w:poslist) - 1, a:posn])])
+  if w:poslist_pos == posn
+    return
+  endif
+  let pos = w:poslist[posn]
+  if bufnr('%') != pos[0]
+    try
+      execute pos[0] 'buffer'
+    catch
+      echohl ErrorMsg
+      echomsg matchstr(v:exception, '^.\{-}:\zsE\d\+:.*$')
+      echohl None
+      return
+    endtry
+  endif
+  let w:poslist_pos = posn
+  call setpos('.', pos)
+endfunction
+
+
+
+noremap <silent>
+\ <Plug>(poslist-prev-pos) :<C-u>call <SID>move_pos(v:count1)<CR>
+noremap <silent>
+\ <Plug>(poslist-next-pos) :<C-u>call <SID>move_pos(-v:count1)<CR>
+noremap <silent>
+\ <Plug>(poslist-prev-buf) :<C-u>call <SID>move_buf(v:count1)<CR>
+noremap <silent>
+\ <Plug>(poslist-next-buf) :<C-u>call <SID>move_buf(-v:count1)<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
-
-let g:loaded_poslist = 1
-
-" vim: foldmethod=marker
