@@ -31,6 +31,8 @@
 "
 "   1.00: Initial version.
 " }}}
+" TODO:
+"  - Move in visual mode.
 "=============================================================================
 
 if exists('g:loaded_poslist')
