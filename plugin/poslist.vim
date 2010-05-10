@@ -2,8 +2,6 @@
 " FILE: poslist.vim
 " AUTHOR:  Shougo Matsushita <Shougo.Matsu@gmail.com>
 " MODIFIED BY: thinca <thinca+vim@gmail.com>
-" Last Modified: 23 Jan 2010
-" Usage: Just source this file.
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
 "     a copy of this software and associated documentation files (the
