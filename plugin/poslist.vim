@@ -87,7 +87,7 @@ function! s:move_buf(c)
     let posn += sign
   endwhile
   if bufnr('%') != buf
-    call s:goto_pos(posn)
+    call s:goto_pos(posn - sign)
   endif
 endfunction
 
