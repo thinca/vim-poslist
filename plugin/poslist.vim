@@ -27,6 +27,7 @@
 " ChangeLog: "{{{
 "   1.01  2010-05-10
 "       - Fixed a bug that it moves to move of each buffer too much.
+"       - Also jump to same buffer in move of each buffer.
 "
 "   1.00: Initial version.
 " }}}
@@ -89,9 +90,7 @@ function! s:move_buf(c)
     endif
     let posn += sign
   endwhile
-  if bufnr('%') != buf
-    call s:goto_pos(posn - sign)
-  endif
+  call s:goto_pos(posn - sign)
 endfunction
 
 function! s:goto_pos(posn)
