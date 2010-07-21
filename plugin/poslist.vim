@@ -25,6 +25,12 @@
 " Version: 1.01, for Vim 7.0
 "-----------------------------------------------------------------------------
 " ChangeLog: "{{{
+"   1.02  2010-07-21
+"       - Added the jump unit that is the big movement.
+"         - <Plug>(poslist-next-line)
+"         - <Plug>(poslist-prev-line)
+"         - g:poslist_lines
+"
 "   1.01  2010-05-10
 "       - Fixed a bug that it moves to move of each buffer too much.
 "       - Also jump to same buffer in move of each buffer.
@@ -52,6 +58,10 @@ if !exists('g:poslist_histsize')
   let g:poslist_histsize = 50
 endif
 
+if !exists('g:poslist_lines')
+  let g:poslist_lines = 2
+endif
+
 function! s:save_current_pos()
   if !exists('w:poslist')
     let w:poslist = []
@@ -77,6 +87,37 @@ endfunction
 
 function! s:move_pos(c)
   call s:goto_pos(w:poslist_pos + a:c)
+endfunction
+
+function! s:move_line(c)
+  " o o o o o o o o o o o  # cursor points
+  "  s s l l s s s l l s   # s = short jump  l = long jump
+  " .---.-.-.-----.-.-.-.  # stop points
+  let c = abs(a:c)
+  let sign = a:c < 0 ? -1 : 1
+  let idx = w:poslist_pos
+  let p = w:poslist[idx]
+  let len = len(w:poslist)
+  let short_jump = 0
+  while 0 < c
+    let prev = p
+    let nidx = idx + sign
+    if nidx < 0 || len <= nidx
+      break
+    endif
+    let idx = nidx
+    let p = w:poslist[idx]
+    if p[0] != prev[0] || g:poslist_lines <= abs(p[1] - prev[1])
+      if short_jump
+        let short_jump = 0
+        let c -= 1
+      endif
+      let c -= 1
+    else
+      let short_jump = 1
+    endif
+  endwhile
+  call s:goto_pos(idx + (c * sign))
 endfunction
 
 function! s:move_buf(c)
@@ -118,13 +159,17 @@ endfunction
 
 
 noremap <silent>
-\ <Plug>(poslist-prev-pos) :<C-u>call <SID>move_pos(v:count1)<CR>
+\ <Plug>(poslist-prev-pos)  :<C-u>call <SID>move_pos(v:count1)<CR>
 noremap <silent>
-\ <Plug>(poslist-next-pos) :<C-u>call <SID>move_pos(-v:count1)<CR>
+\ <Plug>(poslist-next-pos)  :<C-u>call <SID>move_pos(-v:count1)<CR>
 noremap <silent>
-\ <Plug>(poslist-prev-buf) :<C-u>call <SID>move_buf(v:count1)<CR>
+\ <Plug>(poslist-prev-line) :<C-u>call <SID>move_line(v:count1)<CR>
 noremap <silent>
-\ <Plug>(poslist-next-buf) :<C-u>call <SID>move_buf(-v:count1)<CR>
+\ <Plug>(poslist-next-line) :<C-u>call <SID>move_line(-v:count1)<CR>
+noremap <silent>
+\ <Plug>(poslist-prev-buf)  :<C-u>call <SID>move_buf(v:count1)<CR>
+noremap <silent>
+\ <Plug>(poslist-next-buf)  :<C-u>call <SID>move_buf(-v:count1)<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
