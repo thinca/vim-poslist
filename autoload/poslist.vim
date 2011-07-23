@@ -33,7 +33,11 @@ function! poslist#save_current_pos()
 
   let pos = getpos('.')
   let pos[0] = bufnr('%')
-  if empty(w:poslist) || pos != w:poslist[w:poslist_pos]
+  if (empty(w:poslist) || (pos != w:poslist[w:poslist_pos] &&
+        \ ((abs(pos[2] - w:poslist[w:poslist_pos][2]) >= g:poslist_min_save_unit
+        \      && pos[1] == w:poslist[w:poslist_pos][1])
+        \|| abs(pos[1] - w:poslist[w:poslist_pos][1]) >= g:poslist_min_save_unit)
+        \ ))
     " Browser like history.
     if 0 < w:poslist_pos
       unlet w:poslist[: w:poslist_pos - 1]

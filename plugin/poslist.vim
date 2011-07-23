@@ -65,6 +65,10 @@ if !exists('g:poslist_lines')
   let g:poslist_lines = 2
 endif
 
+if !exists('g:poslist_min_save_unit')
+  let g:poslist_min_save_unit = 5
+endif
+
 
 noremap <silent>
 \ <Plug>(poslist-prev-pos)  :<C-u>call poslist#move_pos(v:count1)<CR>
