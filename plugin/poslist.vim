@@ -22,26 +22,6 @@
 "     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
-" Version: 1.02, for Vim 7.0
-"-----------------------------------------------------------------------------
-" ChangeLog: "{{{
-"   1.03  2011-04-24
-"       - autoload.
-"
-"   1.02  2010-07-21
-"       - Added the jump unit that is the big movement.
-"         - <Plug>(poslist-next-line)
-"         - <Plug>(poslist-prev-line)
-"         - g:poslist_lines
-"
-"   1.01  2010-05-10
-"       - Fixed a bug that it moves to move of each buffer too much.
-"       - Also jump to same buffer in move of each buffer.
-"
-"   1.00: Initial version.
-" }}}
-" TODO:
-"  - Move in visual mode.
 "=============================================================================
 
 if exists('g:loaded_poslist')
