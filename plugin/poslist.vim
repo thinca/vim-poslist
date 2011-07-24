@@ -46,7 +46,7 @@ if !exists('g:poslist_lines')
 endif
 
 if !exists('g:poslist_min_save_unit')
-  let g:poslist_min_save_unit = 5
+  let g:poslist_min_save_unit = 0
 endif
 
 
