@@ -1,7 +1,7 @@
 *poslist.txt*	more detailed jumplist
 *poslist*
 
-Author: thinca <thinca@gmail.com>
+Author: thinca <thinca+vim@gmail.com>
 Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
 License: MIT License
 
