@@ -3,7 +3,7 @@
 
 Author: thinca <thinca+vim@gmail.com>
 Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
-License: MIT License
+License: zlib License
 
 ==============================================================================
                                                             *poslist-contents*
