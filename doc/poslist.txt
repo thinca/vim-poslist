@@ -6,17 +6,16 @@ Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
 License: zlib License
 
 ==============================================================================
-                                                            *poslist-contents*
-Contents ~
+CONTENTS					*poslist-contents*
 
-Introduction     |poslist-introduction|
-Function         |poslist-function|
-Mapping          |poslist-mapping|
+INTRODUCTION			|poslist-introduction|
+FUNCTION			|poslist-function|
+KEY MAPPINGS			|poslist-key-mappings|
+
 
 
 ==============================================================================
-                                                        *poslist-introduction*
-Introduction ~
+INTRODUCTION					*poslist-introduction*
 
 This plugin provides a more detailed jumplist.
 Compared to the standard |jumplist|, it has the following different features
@@ -32,61 +31,51 @@ Compared to the standard |jumplist|, it has the following different features
       the buffer has changed.
 
 
+
 ==============================================================================
-                                                            *poslist-function*
-Function ~
+INTERFACE					*poslist-interface*
 
-                                                          *poslist#move_pos()*
-poslist#move_pos({n})
+------------------------------------------------------------------------------
+FUNCTION					*poslist-function*
 
+poslist#move_pos({n})				*poslist#move_pos()*
 	Move to the n-th position in the history.
 	If {n} is negative, move to the previous position.
 	If {n} is positive, move to the next position.
 
-                                                         *poslist#move_line()*
-poslist#move_line({n})
-
+poslist#move_line({n})				*poslist#move_line()*
 	Move to the n-th position in the history where the line has changed.
 	If {n} is negative, move to the previous position.
 	If {n} is positive, move to the next position.
 
-                                                          *poslist#move_buf()*
-poslist#move_buf({n})
-
+poslist#move_buf({n})				*poslist#move_buf()*
 	Move to the n-th position in the history where the buffer has changed.
 	If {n} is negative, move to the previous position.
 	If {n} is positive, move to the next position.
 
 
-==============================================================================
-                                            *poslist-keymap* *poslist-mapping*
-Mapping  ~
 
-The following mappings are defined by default.
+------------------------------------------------------------------------------
+KEY MAPPINGS					*poslist-key-mappings*
 
-                                                  *<Plug>(poslist-prev-pos)*
-<Plug>(poslist-prev-pos)
+<Plug>(poslist-prev-pos)			*<Plug>(poslist-prev-pos)*
     Move to the previous position in the history.
 
-                                                  *<Plug>(poslist-next-pos)*
-<Plug>(poslist-next-pos)
+<Plug>(poslist-next-pos)			*<Plug>(poslist-next-pos)*
     Move to the next position in the history.
 
-                                                 *<Plug>(poslist-prev-line)*
-<Plug>(poslist-prev-line)
+<Plug>(poslist-prev-line)			*<Plug>(poslist-prev-line)*
     Move to the previous position in the history where the line has changed.
 
-                                                 *<Plug>(poslist-next-line)*
-<Plug>(poslist-next-line)
+<Plug>(poslist-next-line)			*<Plug>(poslist-next-line)*
     Move to the next position in the history where the line has changed.
 
-                                                  *<Plug>(poslist-prev-buf)*
-<Plug>(poslist-prev-buf)
+<Plug>(poslist-prev-buf)			*<Plug>(poslist-prev-buf)*
     Move to the previous position in the history where the buffer has changed.
 
-                                                  *<Plug>(poslist-next-buf)*
-<Plug>(poslist-next-buf)
+<Plug>(poslist-next-buf)			*<Plug>(poslist-next-buf)*
     Move to the next position in the history where the buffer has changed.
+
 
 
 ==============================================================================
