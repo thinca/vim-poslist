@@ -9,8 +9,9 @@ License: zlib License
 CONTENTS					*poslist-contents*
 
 INTRODUCTION			|poslist-introduction|
-FUNCTION			|poslist-function|
-KEY MAPPINGS			|poslist-key-mappings|
+INTERFACE			|poslist-interface|
+  KEY MAPPINGS			  |poslist-key-mappings|
+  FUNCTION			  |poslist-function|
 
 
 
@@ -36,26 +37,6 @@ Compared to the standard |jumplist|, it has the following different features
 INTERFACE					*poslist-interface*
 
 ------------------------------------------------------------------------------
-FUNCTION					*poslist-function*
-
-poslist#move_pos({n})				*poslist#move_pos()*
-	Move to the n-th position in the history.
-	If {n} is negative, move to the previous position.
-	If {n} is positive, move to the next position.
-
-poslist#move_line({n})				*poslist#move_line()*
-	Move to the n-th position in the history where the line has changed.
-	If {n} is negative, move to the previous position.
-	If {n} is positive, move to the next position.
-
-poslist#move_buf({n})				*poslist#move_buf()*
-	Move to the n-th position in the history where the buffer has changed.
-	If {n} is negative, move to the previous position.
-	If {n} is positive, move to the next position.
-
-
-
-------------------------------------------------------------------------------
 KEY MAPPINGS					*poslist-key-mappings*
 
 <Plug>(poslist-prev-pos)			*<Plug>(poslist-prev-pos)*
@@ -75,6 +56,26 @@ KEY MAPPINGS					*poslist-key-mappings*
 
 <Plug>(poslist-next-buf)			*<Plug>(poslist-next-buf)*
     Move to the next position in the history where the buffer has changed.
+
+
+
+------------------------------------------------------------------------------
+FUNCTION					*poslist-function*
+
+poslist#move_pos({n})				*poslist#move_pos()*
+	Move to the n-th position in the history.
+	If {n} is negative, move to the previous position.
+	If {n} is positive, move to the next position.
+
+poslist#move_line({n})				*poslist#move_line()*
+	Move to the n-th position in the history where the line has changed.
+	If {n} is negative, move to the previous position.
+	If {n} is positive, move to the next position.
+
+poslist#move_buf({n})				*poslist#move_buf()*
+	Move to the n-th position in the history where the buffer has changed.
+	If {n} is negative, move to the previous position.
+	If {n} is positive, move to the next position.
 
 
 
