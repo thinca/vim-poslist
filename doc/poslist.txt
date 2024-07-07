@@ -64,27 +64,27 @@ Mapping  ~
 
 The following mappings are defined by default.
 
-                                                  *`<Plug>(poslist-prev-pos)`*
+                                                  *<Plug>(poslist-prev-pos)*
 <Plug>(poslist-prev-pos)
     Move to the previous position in the history.
 
-                                                  *`<Plug>(poslist-next-pos)`*
+                                                  *<Plug>(poslist-next-pos)*
 <Plug>(poslist-next-pos)
     Move to the next position in the history.
 
-                                                 *`<Plug>(poslist-prev-line)`*
+                                                 *<Plug>(poslist-prev-line)*
 <Plug>(poslist-prev-line)
     Move to the previous position in the history where the line has changed.
 
-                                                 *`<Plug>(poslist-next-line)`*
+                                                 *<Plug>(poslist-next-line)*
 <Plug>(poslist-next-line)
     Move to the next position in the history where the line has changed.
 
-                                                  *`<Plug>(poslist-prev-buf)`*
+                                                  *<Plug>(poslist-prev-buf)*
 <Plug>(poslist-prev-buf)
     Move to the previous position in the history where the buffer has changed.
 
-                                                  *`<Plug>(poslist-next-buf)`*
+                                                  *<Plug>(poslist-next-buf)*
 <Plug>(poslist-next-buf)
     Move to the next position in the history where the buffer has changed.
 
