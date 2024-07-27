@@ -1,6 +1,7 @@
 *poslist.txt*	more detailed jumplist
 *poslist*
 
+Version: 1.03
 Author: thinca <thinca+vim@gmail.com>
 Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
 License: zlib License
@@ -112,6 +113,27 @@ Replace jumplist by poslist.
 	map <C-o> <Plug>(poslist-prev-pos)
 	map <C-i> <Plug>(poslist-next-pos)
 <
+
+
+==============================================================================
+CHANGELOG					*poslist-changelog*
+
+1.03	2011-04-24
+	- autoload.
+
+1.02	2010-07-21
+	- Added the jump unit that is the big movement.
+	  - |<Plug>(poslist-next-line)|
+	  - |<Plug>(poslist-prev-line)|
+	  - |g:poslist_lines|
+
+1.01	2010-05-10
+	- Fixed a bug that it moves to move of each buffer too much.
+	- Also jump to same buffer in move of each buffer.
+
+1.00	2009-12-17
+	- Initial version.
+
 
 
 ==============================================================================
