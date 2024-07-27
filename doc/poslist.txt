@@ -1,7 +1,7 @@
 *poslist.txt*	more detailed jumplist
 *poslist*
 
-Version: 1.03
+Version: 1.4.0
 Author: thinca <thinca+vim@gmail.com>
 Author: Shougo Matsushita <Shougo.Matsu@gmail.com>
 License: zlib License
@@ -117,6 +117,10 @@ Replace jumplist by poslist.
 
 ==============================================================================
 CHANGELOG					*poslist-changelog*
+
+1.4.0	2024-07-27
+	- Add documentation.
+	- Change versioning to semver.
 
 1.03	2011-04-24
 	- autoload.
