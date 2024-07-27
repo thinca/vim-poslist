@@ -13,6 +13,7 @@ INTERFACE			|poslist-interface|
   KEY MAPPINGS			  |poslist-key-mappings|
   FUNCTION			  |poslist-function|
 CUSTOMIZING			|poslist-customizing|
+EXAMPLES			|poslist-examples|
 
 
 
@@ -101,6 +102,16 @@ g:poslist_min_save_unit				*g:poslist_min_save_unit*
 	position.
 	Default: 0
 
+
+
+==============================================================================
+EXAMPLES					*poslist-examples*
+
+Replace jumplist by poslist.
+>
+	map <C-o> <Plug>(poslist-prev-pos)
+	map <C-i> <Plug>(poslist-next-pos)
+<
 
 
 ==============================================================================
