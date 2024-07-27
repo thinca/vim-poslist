@@ -12,6 +12,7 @@ INTRODUCTION			|poslist-introduction|
 INTERFACE			|poslist-interface|
   KEY MAPPINGS			  |poslist-key-mappings|
   FUNCTION			  |poslist-function|
+CUSTOMIZING			|poslist-customizing|
 
 
 
@@ -76,6 +77,29 @@ poslist#move_buf({n})				*poslist#move_buf()*
 	Move to the n-th position in the history where the buffer has changed.
 	If {n} is negative, move to the previous position.
 	If {n} is positive, move to the next position.
+
+
+
+==============================================================================
+CUSTOMIZING					*poslist-customizing*
+
+g:poslist_histsize				*g:poslist_histsize*
+	Maximum size of history.
+	Default: 50
+
+g:poslist_lines					*g:poslist_lines*
+	This is an option for |<Plug>(poslist-prev-line)|,
+	|<Plug>(poslist-next-line)|, and |poslist#move_line()|.
+	Line movements of this value or less will not be detected as line
+	movements.  For example, if this value is 2, move_line() will ignore a
+	movement of only one line and will not treat it as a jump destination.
+	Default: 2
+
+g:poslist_min_save_unit				*g:poslist_min_save_unit*
+	Do not save the position if the movement is less than this value.
+	For example, if this value is 5, then `4l` or `4j` will not save the
+	position.
+	Default: 0
 
 
 
